@@ -4,3 +4,8 @@ function generateItemComputer() {
   else if (randomNumber === 2) return "paper";
   else return "scissors";
 }
+
+function promptUser() {
+  let userItem = prompt("Please enter rock, scissors or paper");
+  return userItem;
+}
