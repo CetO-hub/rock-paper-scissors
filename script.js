@@ -16,6 +16,7 @@ function selectPlayer(e) {
 
 // Play one round
 function playRound(playerItem, computerItem) {
+  clearTimeout(timeOutId);
   if (
     (playerItem === "rock" && computerItem === "scissors") ||
     (playerItem === "scissors" && computerItem === "paper") ||
@@ -38,18 +39,22 @@ function displayWinnerRound(winner) {
   playerItem.innerHTML = isSelectionPlayer;
   if (winner === "player") {
     playerCount++;
+    displayWinnerGame();
     let won = document.querySelector(".scorePlayer");
     let makeChoice = document.querySelector(".makeChoice");
     won.innerText = playerCount;
     makeChoice.innerText = "You have won!";
-    return setTimeout(resetBoard, 1000);
+    timeOutId = setTimeout(resetBoard, 3500);
+    return;
   }
   computerCount++;
+  displayWinnerGame();
   let won = document.querySelector(".scoreComputer");
   let makeChoice = document.querySelector(".makeChoice");
   won.innerText = computerCount;
   makeChoice.innerText = "You have lost!";
-  return setTimeout(resetBoard, 1000);
+  timeOutId = setTimeout(resetBoard, 3500);
+  return;
 }
 
 // Reset the styles of the board for next round
@@ -65,12 +70,32 @@ function resetBoard() {
 }
 // Display the winner of the game
 function displayWinnerGame() {
+  let playFieldHeader = document.querySelector(".playFieldHeader");
+  let playFieldBody = document.querySelector(".playFieldBody");
+  let gameOver = document.querySelector(".gameOver");
+  let playField = document.querySelector(".playField");
+  if (playerCount === 5) {
+    playFieldHeader.setAttribute("style", "display:none;");
+    playFieldBody.setAttribute("style", "display:none;");
+    gameOver.innerText = "You have won the game!";
+    gameOver.setAttribute("style", "display:flex;");
+    playField.setAttribute("style", "justify-content:center;");
+    return;
+  } else if (computerCount === 5) {
+    playFieldHeader.setAttribute("style", "display:none;");
+    playFieldBody.setAttribute("style", "display:none;");
+    gameOver.innerText = "You have lost the game!";
+    gameOver.setAttribute("style", "display:flex;");
+    playField.setAttribute("style", "justify-content:center;");
+    return;
+  }
   return;
 }
 var isSelectionPlayer = 0;
 var isComputerItem = 0;
 let playerCount = 0;
 let computerCount = 0;
+let timeOutId = 0;
 
 let isButtons = document.querySelectorAll(".btn");
 isButtons.forEach((btn) => btn.addEventListener("click", selectPlayer));
