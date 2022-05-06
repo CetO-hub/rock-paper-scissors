@@ -22,7 +22,14 @@ function playRound(playerItem, computerItem) {
     (playerItem === "paper" && computerItem === "rock")
   ) {
     return displayWinnerRound("player");
+  } else if (
+    (playerItem === "rock" && computerItem === "rock") ||
+    (playerItem === "scissors" && computerItem === "scissors") ||
+    (playerItem === "paper" && computerItem === "paper")
+  ) {
+    return displayWinnerRound("draw");
   }
+
   return displayWinnerRound("computer");
 }
 
@@ -32,6 +39,7 @@ function displayWinnerRound(winner) {
   let playerItem = document.querySelector(".playerItem");
   let arrows = document.querySelectorAll(".arrow");
   let choiceMessage = document.querySelector(".choiceMessage");
+  let makeChoice = document.querySelector(".makeChoice");
   choiceMessage.setAttribute("style", "display:flex;");
   arrows.forEach((arrow) => arrow.setAttribute("style", "display:none;"));
   computerItem.innerHTML = isComputerItem;
@@ -40,16 +48,18 @@ function displayWinnerRound(winner) {
     playerCount++;
     displayWinnerGame();
     let won = document.querySelector(".scorePlayer");
-    let makeChoice = document.querySelector(".makeChoice");
     won.innerText = playerCount;
     makeChoice.innerText = "You have won!";
+    timeOutId = setTimeout(resetBoard, 3500);
+    return;
+  } else if (winner === "draw") {
+    makeChoice.innerText = "Nobody won, it is a draw!";
     timeOutId = setTimeout(resetBoard, 3500);
     return;
   }
   computerCount++;
   displayWinnerGame();
   let won = document.querySelector(".scoreComputer");
-  let makeChoice = document.querySelector(".makeChoice");
   won.innerText = computerCount;
   makeChoice.innerText = "You have lost!";
   timeOutId = setTimeout(resetBoard, 3500);
