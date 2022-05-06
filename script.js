@@ -8,8 +8,10 @@ function generateItemComputer() {
 
 // Selection by the player
 function selectPlayer(e) {
-  let isSelectionPlayer = e.target["id"];
-  return playRound(isSelectionPlayer, generateItemComputer());
+  isSelectionPlayer = e.target["id"];
+  console.log(isSelectionPlayer);
+  isComputerItem = generateItemComputer();
+  return playRound(isSelectionPlayer, isComputerItem);
 }
 
 // Play one round
@@ -26,28 +28,27 @@ function playRound(playerItem, computerItem) {
 
 // Display the winner
 function displayWinnerRound(winner) {
-  console.log(winner);
+  let computerItem = document.querySelector(".computerItem");
+  let playerItem = document.querySelector(".playerItem");
+  let arrows = document.querySelectorAll(".arrow");
+  let choiceMessage = document.querySelector(".choiceMessage");
+  choiceMessage.setAttribute("style", "display:flex;");
+  arrows.forEach((arrow) => arrow.setAttribute("style", "display:none;"));
+  computerItem.innerHTML = isComputerItem;
+  playerItem.innerHTML = isSelectionPlayer;
   if (winner === "player") {
     playerCount++;
     let won = document.querySelector(".scorePlayer");
-    let wonMessage = document.querySelector(".won");
     let makeChoice = document.querySelector(".makeChoice");
-    let arrows = document.querySelectorAll(".arrow");
-    wonMessage.setAttribute("style", "display:flex;");
     won.innerText = playerCount;
-    makeChoice.setAttribute("style", "display:none;");
-    arrows.forEach((arrow) => arrow.setAttribute("style", "display:none;"));
+    makeChoice.innerText = "You have won!";
     return setTimeout(resetBoard, 1000);
   }
   computerCount++;
   let won = document.querySelector(".scoreComputer");
-  let lostMessage = document.querySelector(".lost");
   let makeChoice = document.querySelector(".makeChoice");
-  let arrows = document.querySelectorAll(".arrow");
-  lostMessage.setAttribute("style", "display:flex;");
   won.innerText = computerCount;
-  makeChoice.setAttribute("style", "display:none;");
-  arrows.forEach((arrow) => arrow.setAttribute("style", "display:none;"));
+  makeChoice.innerText = "You have lost!";
   return setTimeout(resetBoard, 1000);
 }
 
@@ -55,18 +56,19 @@ function displayWinnerRound(winner) {
 function resetBoard() {
   let makeChoice = document.querySelector(".makeChoice");
   let arrows = document.querySelectorAll(".arrow");
-  makeChoice.setAttribute("style", "display:flex;");
-  arrows.forEach((arrow) => arrow.setAttribute("style", "visibility:visible;"));
-  let lostMessage = document.querySelector(".lost");
-  let wonMessage = document.querySelector(".won");
-  lostMessage.setAttribute("style", "display:none;");
-  wonMessage.setAttribute("style", "display:none;");
+  let choiceMessage = document.querySelector(".choiceMessage");
+  choiceMessage.setAttribute("style", "display:none;");
+  makeChoice.innerText = "Make your choice!";
+  arrows.forEach((arrow) => arrow.setAttribute("style", "display:flex;"));
+
   return;
 }
 // Display the winner of the game
 function displayWinnerGame() {
   return;
 }
+var isSelectionPlayer = 0;
+var isComputerItem = 0;
 let playerCount = 0;
 let computerCount = 0;
 
