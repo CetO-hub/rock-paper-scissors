@@ -7,11 +7,15 @@ function generateItemComputer() {
 }
 
 // Selection by the player
-function selectPlayer() {
-  return;
+function selectPlayer(e) {
+  let isSelectionPlayer = e.target["id"];
+  return playRound(isSelectionPlayer, generateItemComputer());
 }
+
 // Play one round
-function playRound() {
+function playRound(player, computer) {
+  console.log(player);
+  console.log(computer);
   return;
 }
 
@@ -23,3 +27,6 @@ function displayWinnerRound() {
 function displayWinnerGame() {
   return;
 }
+
+let isButtons = document.querySelectorAll(".btn");
+isButtons.forEach((btn) => btn.addEventListener("click", selectPlayer));
