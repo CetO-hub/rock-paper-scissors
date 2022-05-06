@@ -51,6 +51,16 @@ body img {
   align-items: center;
 }
 
+.makeChoice {
+}
+
+.won,
+.lost {
+  position: relative;
+  top: -200px;
+  display: none;
+}
+
 .scoreText {
   font-size: 2.5rem;
   margin: 0 30px;
@@ -62,6 +72,9 @@ body img {
   align-items: center;
   position: relative;
   z-index: 1;
+}
+
+.arrow {
 }
 
 .arrows img {
@@ -79,9 +92,12 @@ body img {
   }
 }
 
-.score {
-  font-size: 2rem;
-  margin: 0 10px;
+.scorePlayer,
+.scoreComputer {
+  position: relative;
+  font-size: 5rem;
+  top: 102px;
+  margin: 0 70px;
 }
 
 .playFieldBody {
