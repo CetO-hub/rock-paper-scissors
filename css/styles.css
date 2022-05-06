@@ -55,9 +55,6 @@ body img {
   align-items: center;
 }
 
-.makeChoice {
-}
-
 .scoreText {
   font-size: 2.5rem;
   margin: 0 30px;
@@ -70,9 +67,6 @@ body img {
   align-items: center;
   position: relative;
   z-index: 1;
-}
-
-.arrow {
 }
 
 .choiceMessage {

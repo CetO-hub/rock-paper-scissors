@@ -9,7 +9,6 @@ function generateItemComputer() {
 // Selection by the player
 function selectPlayer(e) {
   isSelectionPlayer = e.target["id"];
-  console.log(isSelectionPlayer);
   isComputerItem = generateItemComputer();
   return playRound(isSelectionPlayer, isComputerItem);
 }
